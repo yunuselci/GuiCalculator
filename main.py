@@ -43,7 +43,7 @@ if __name__ == "__main__":
     tk.configure(background="#F5F5F5")
     tk.title("Gui Calculator With Python")
     tk.geometry("375x667")
-    tk.resizable(False, False)
+    tk.resizable(True, True)
     sum = StringVar()
 
     inputFrame = Frame(tk, width=312, height=50, bd=0)
@@ -56,6 +56,11 @@ if __name__ == "__main__":
 
     mainFrame = Frame(tk, bg="#F5F5F5")
     mainFrame.pack(expand=True, fill='both')
+
+    mainFrame.rowconfigure(0, weight=1)
+    for x in range(1, 5):
+        mainFrame.rowconfigure(x, weight=1)
+        mainFrame.columnconfigure(x, weight=1)
 
     digits = {
         7: (1, 1), 8: (1, 2), 9: (1, 3),
