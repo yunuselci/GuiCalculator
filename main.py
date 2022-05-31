@@ -1,6 +1,7 @@
 from tkinter import *
 
 expression = ""
+ans = ""
 resultStatus = False
 
 
@@ -24,12 +25,24 @@ def pressClear():
     sum.set(sum.get()[0:-1])
 
 
+def pressAns():
+    try:
+        global expression, resultStatus, ans
+        sum.set(ans)
+        resultStatus = False
+    except Exception as e:
+        print(e)
+        sum.set("Error")
+        expression = ""
+
+
 def pressEqual():
     try:
-        global expression, resultStatus
+        global expression, resultStatus, ans
         expression = sum.get()
         result = str(eval(expression))
         sum.set(result)
+        ans = result
         expression = ""
         resultStatus = True
     except Exception as e:
@@ -84,6 +97,10 @@ if __name__ == "__main__":
     acButton = Button(mainFrame, text="AC", bg="#F8FAFF", fg="#25265E", font=("Arial", 20),
                       borderwidth=0, command=pressAc)
     acButton.grid(row=0, column=2, sticky=NSEW)
+
+    buttonAns = Button(mainFrame, text="ANS", bg="#F8FAFF", fg="#25265E", font=("Arial", 20),
+                      borderwidth=0, command=pressAns)
+    buttonAns.grid(row=0, column=3, sticky=NSEW)
 
     operations = {"/": "\u00F7", "*": "\u00D7", "-": "-", "+": "+"}
     i = 0
