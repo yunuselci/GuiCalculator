@@ -8,46 +8,46 @@ resultStatus = False
 def pressNumbers(var):
     global expression, resultStatus
     if resultStatus:
-        sum.set("")
+        summary.set("")
     resultStatus = False
-    sum.set(sum.get() + (str(var)))
+    summary.set(summary.get() + (str(var)))
 
 
 def pressAc():
     global expression
     expression = ""
-    sum.set("")
+    summary.set("")
 
 
 def pressClear():
     global expression
     expression = ""
-    sum.set(sum.get()[0:-1])
+    summary.set(summary.get()[0:-1])
 
 
 def pressAns():
     try:
         global expression, resultStatus, ans
-        sum.set(ans)
+        summary.set(ans)
         resultStatus = False
     except Exception as e:
         print(e)
-        sum.set("Error")
+        summary.set("Error")
         expression = ""
 
 
 def pressEqual():
     try:
         global expression, resultStatus, ans
-        expression = sum.get()
+        expression = summary.get()
         result = str(eval(expression))
-        sum.set(result)
+        summary.set(result)
         ans = result
         expression = ""
         resultStatus = True
     except Exception as e:
         print(e)
-        sum.set("Error")
+        summary.set("Error")
         expression = ""
 
 
@@ -57,12 +57,12 @@ if __name__ == "__main__":
     tk.title("Gui Calculator With Python")
     tk.geometry("375x667")
     tk.resizable(True, True)
-    sum = StringVar()
+    summary = StringVar()
 
     inputFrame = Frame(tk, width=312, height=50, bd=0)
     inputFrame.pack(side=TOP)
 
-    inputField = Entry(inputFrame, textvariable=sum, width=50, fg="#25265E", bg="#F5F5F5", bd=0,
+    inputField = Entry(inputFrame, textvariable=summary, width=50, fg="#25265E", bg="#F5F5F5", bd=0,
                        font=("Arial", 40, "bold"), justify=RIGHT)
     inputField.grid(row=0, column=0)
     inputField.pack(ipady=13)
@@ -83,7 +83,7 @@ if __name__ == "__main__":
     }
     for digit, digitGrid in digits.items():
         digitButton = Button(mainFrame, text=str(digit), fg="#25265E", bd=0, bg="#FFFFFF", font=("Arial", 24, "bold"),
-                             width=3, height=3, command=lambda x=digit: pressNumbers(x))
+                             width=3, height=3, command=lambda iteration=digit: pressNumbers(iteration))
         digitButton.grid(row=digitGrid[0], column=digitGrid[1], sticky=NSEW)
 
     clearButton = Button(mainFrame, text="C", bg="#F8FAFF", fg="#25265E", font=("Arial", 20),
@@ -99,14 +99,14 @@ if __name__ == "__main__":
     acButton.grid(row=0, column=2, sticky=NSEW)
 
     buttonAns = Button(mainFrame, text="ANS", bg="#F8FAFF", fg="#25265E", font=("Arial", 20),
-                      borderwidth=0, command=pressAns)
+                       borderwidth=0, command=pressAns)
     buttonAns.grid(row=0, column=3, sticky=NSEW)
 
     operations = {"/": "\u00F7", "*": "\u00D7", "-": "-", "+": "+"}
     i = 0
     for operator, symbol in operations.items():
         acButton = Button(mainFrame, text=symbol, bg="#F8FAFF", fg="#25265E", font=("Arial", 20),
-                          borderwidth=0, command=lambda x=operator: pressNumbers(x))
+                          borderwidth=0, command=lambda iteration=operator: pressNumbers(iteration))
         acButton.grid(row=i, column=4, sticky=NSEW)
         i += 1
 
