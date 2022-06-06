@@ -20,8 +20,9 @@ def pressAc():
 
 
 def pressClear():
-    global expression
+    global expression, resultStatus
     expression = ""
+    resultStatus = False
     summary.set(summary.get()[0:-1])
 
 
@@ -62,7 +63,7 @@ if __name__ == "__main__":
     inputFrame = Frame(tk, width=312, height=50, bd=0)
     inputFrame.pack(side=TOP)
 
-    inputField = Entry(inputFrame, textvariable=summary, width=50, fg="#25265E", bg="#F5F5F5", bd=0,
+    inputField = Entry(inputFrame, textvariable=summary, width=50, fg="#FFFFFF", bg="#1C1C1C", bd=0,
                        font=("Arial", 40, "bold"), justify=RIGHT)
     inputField.grid(row=0, column=0)
     inputField.pack(ipady=13)
@@ -82,30 +83,30 @@ if __name__ == "__main__":
         0: (4, 2), '.': (4, 1)
     }
     for digit, digitGrid in digits.items():
-        digitButton = Button(mainFrame, text=str(digit), fg="#25265E", bd=0, bg="#FFFFFF", font=("Arial", 24, "bold"),
+        digitButton = Button(mainFrame, text=str(digit), fg="#FFFFFF", bd=0, bg="#505050", font=("Arial", 24, "bold"),
                              width=3, height=3, command=lambda iteration=digit: pressNumbers(iteration))
         digitButton.grid(row=digitGrid[0], column=digitGrid[1], sticky=NSEW)
 
-    clearButton = Button(mainFrame, text="C", bg="#F8FAFF", fg="#25265E", font=("Arial", 20),
+    clearButton = Button(mainFrame, text="C", bg="#D4D4D2", fg="#1C1C1C", font=("Arial", 20),
                          borderwidth=0, command=pressClear)
     clearButton.grid(row=0, column=1, sticky=NSEW)
 
-    equalButton = Button(mainFrame, text="=", bg="#CCEDFF", fg="#25265E", font=("Arial", 20),
+    equalButton = Button(mainFrame, text="=", bg="#FF9500", fg="#F5F5F5", font=("Arial", 20),
                          borderwidth=0, command=pressEqual)
     equalButton.grid(row=4, column=3, columnspan=2, sticky=NSEW)
 
-    acButton = Button(mainFrame, text="AC", bg="#F8FAFF", fg="#25265E", font=("Arial", 20),
+    acButton = Button(mainFrame, text="AC", bg="#D4D4D2", fg="#1C1C1C", font=("Arial", 20),
                       borderwidth=0, command=pressAc)
     acButton.grid(row=0, column=2, sticky=NSEW)
 
-    buttonAns = Button(mainFrame, text="ANS", bg="#F8FAFF", fg="#25265E", font=("Arial", 20),
+    buttonAns = Button(mainFrame, text="ANS", bg="#D4D4D2", fg="#1C1C1C", font=("Arial", 20),
                        borderwidth=0, command=pressAns)
     buttonAns.grid(row=0, column=3, sticky=NSEW)
 
     operations = {"/": "\u00F7", "*": "\u00D7", "-": "-", "+": "+"}
     i = 0
     for operator, symbol in operations.items():
-        acButton = Button(mainFrame, text=symbol, bg="#F8FAFF", fg="#25265E", font=("Arial", 20),
+        acButton = Button(mainFrame, text=symbol, bg="#FF9500", fg="#F5F5F5", font=("Arial", 20),
                           borderwidth=0, command=lambda iteration=operator: pressNumbers(iteration))
         acButton.grid(row=i, column=4, sticky=NSEW)
         i += 1
